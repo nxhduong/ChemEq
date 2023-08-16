@@ -1,5 +1,6 @@
 # ChemEq
 ![](/res/app.png)
+
 ChemEq is a simple chemical equations balancer written in Python. 
 
 This program constructs a matrix based on the number of atoms of each element in each substance. Coefficients are then found by calculating the null space of the matrix.
