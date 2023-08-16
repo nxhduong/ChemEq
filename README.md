@@ -1,26 +1,33 @@
 # ChemEq
-A simple chemical equations balancer, written in Python.
+![](/res/app.png)
+ChemEq is a simple chemical equations balancer written in Python. 
+
+This program constructs a matrix based on the number of atoms of each element in each substance. Coefficients are then found by calculating the null space of the matrix.
+
+Any contributions to this project are greatly appreciated.
+## Requirements
+If run from source code:
+- Python 3.10.x
+- NumPy and SciPy Python packages 
 ## Usage
-Enter python  into the command line.
-Input an unbalanced equation, e.g. CH4 + O2 = CO2 + H2O
-Or use
-## Further reading: Balancing a chemical equation using matrix operations
-To balance a chemical equation using matrix operations, we first need to represent the equation as a system of linear equations. We can do this by creating a matrix that represents the coefficients of the elements in each compound. For example, consider the following equation:
+- Run from source code:
+1. Enter `python main.py` into the command line.
+2. Input an unbalanced equation, e.g. CH4 + O2 = CO2 + H2O
 
-CH4 + O2 -> CO2 + H2O
+- Pre-packaged app are also available on the `Releases` page
+### Notes: Valid equation format
+- Reactants and products are separated by an equal sign (`=`)
+- Each substance in the reactants or the products is separated by a plus sign (`+`)
+- Atoms are grouped using round (`()`) or square (`[]`) brackets. Curly brackets must only be used to specify charges.
 
-We can represent this equation as a system of linear equations:
-
-C: 1x + 0y - 1z = 0
-H: 4x + 0y - 2w = 0
-O: 2y - 2z - 1w = 0
-where x, y, z, and w are the coefficients of CH4, O2, CO2, and H2O, respectively. The first equation represents the conservation of carbon atoms, the second equation represents the conservation of hydrogen atoms, and the third equation represents the conservation of oxygen atoms.
-
-We can represent this system of linear equations as a matrix:
-
-1 0 -1 0
-4 0 0 -2
-0 2 -2 -1
-Each row corresponds to an equation and each column corresponds to a compound. The first column corresponds to CH4, the second column corresponds to O2, the third column corresponds to CO2, and the fourth column corresponds to H2O.
-
-To solve for the coefficients of the balanced equation, we need to find the nullspace of the matrix. The nullspace of a matrix is the set of all vectors that, when multiplied by the matrix, result in a zero vector. In other words, balancing a chemical equation requires finding the values of x, y, z, and w that satisfy the system of linear equations.
+E.g.
+```
+Fe{2+} + Cl2 = Fe{3+} + Cl{-}
+```
+```
+(Cr[CO(NH2)2]6)4[Cr(CN)6]3 + KMnO4 + HNO3 = K2Cr2O7 + CO2 + KNO3 + Mn(NO3)3 + H2O
+```
+## License
+Distributed under the MIT license. Please see `LICENSE` for further information.
+## Contact
+- My GitHub: https://github.com/nxhduong
