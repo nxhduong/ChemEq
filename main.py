@@ -1,11 +1,11 @@
-import chem_eq
+from chem_eq import balance
 from tkinter import Tk, Button, Label, Text
 
 defaultFont = ("Arial", 12)
 
 def buttonOnClick():
     try:
-        result, warn = chem_eq.balance(inputField.get("1.0", "end-1c"))
+        result, warn = balance(inputField.get("1.0", "end-1c"))
         resultText.config(text="Result:\n" + result + (warn or ""))
     except Exception as err:
         resultText.config(text="Result:\n" + err)
