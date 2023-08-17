@@ -49,43 +49,38 @@ def balance(equation: str) -> tuple[str, str]:
     linearEqs = np.zeros((len(elements) + 1, len(substances)))
 
     for i, element in enumerate(elements):
-        for j in range(len(substances)):
+        for j, substance in enumerate(substances):
             count = 0
             occurences = []
             
-            for indices in re.finditer(element + r"(?![a-z])", substances[j]):
+            for indices in re.finditer(element + r"(?![a-z])", substance):
                 occurences.append((indices.start(), indices.end() - 1))
             
             # Count atoms in each substance
             for pos in occurences:
-                leftParens = 0
                 skippableParens = 0
-                
                 k = pos[1] + 1
-                while k < len(substances[j]) and substances[j][k].isnumeric():
-                    k += 1
+                
+                while k < len(substance) and substance[k].isnumeric():
+                    k += 1    
+                subcount = int(substance[pos[1] + 1 : k]) if k - (pos[1] + 1) > 0 else 1
                     
-                subcount = int(substances[j][pos[1] + 1 : k]) if k - (pos[1] + 1) > 0 else 1
-                    
-                # Multiply the count by the subscript outside of the brackets
-                for k in range(pos[0], -1, -1):
-                    leftParens += 1 if substances[j][k] == "(" else 0
-                                                
-                for k in range(pos[1], len(substances[j])):
-                    if substances[j][k] == ")":
+                # Multiply the count by the subscript outside of the brackets                                                
+                for k in range(pos[1], len(substance)):
+                    if substance[k] == ")":
                         if skippableParens == 0:
                             l = k + 1
-                            while l < len(substances[j]) and substances[j][l].isnumeric():
+                            while l < len(substance) and substance[l].isnumeric():
                                 l += 1
                             if l - (k + 1) > 0:
-                                subcount *= int(substances[j][k + 1 : l])
+                                subcount *= int(substance[k + 1 : l])
                         else:
                             skippableParens -= 1
-                    elif substances[j][k] == "(":
+                    elif substance[k] == "(":
                         skippableParens += 1
                         
                 count += subcount
-            linearEqs[i][j] = count if substances[j] in reactants else -count
+            linearEqs[i][j] = count if substance in reactants else -count
     
     # Count charges
     chargeSigns = {
@@ -94,15 +89,15 @@ def balance(equation: str) -> tuple[str, str]:
         "++": 2,
         "--": -2
     }
-    for i in range(len(substances)):
-        if substances[i].find("{") != -1 and substances[i].find("}") != -1:
-            charge = substances[i][substances[i].index("{") + 1 : substances[i].index("}")][::-1]
+    for i, substance in enumerate(substances):
+        if "{" in substance and "}" in substance:
+            charge = substance[substance.index("{") + 1 : substance.index("}")][::-1]
             
             if charge in chargeSigns:
-                linearEqs[-1][i] = chargeSigns[charge] if substances[i] in reactants else -chargeSigns[charge]
+                linearEqs[-1][i] = chargeSigns[charge] if substance in reactants else -chargeSigns[charge]
             else:
                 try:
-                    linearEqs[-1][i] = int(charge) if substances[i] in reactants else -int(charge)
+                    linearEqs[-1][i] = int(charge) if substance in reactants else -int(charge)
                 except ValueError:
                     continue
             
@@ -114,17 +109,17 @@ def balance(equation: str) -> tuple[str, str]:
         raise ValueError("Invalid equation. " + err)
     
     if all(coeff < 0 for coeff in coeffs):
-        coeffs = list(map(lambda x: -x, coeffs))
+        coeffs = [-coeff for coeff in coeffs]
     
     minCoeff = min(coeffs)
-    coeffs = list(map(lambda x: round(x / minCoeff, 4), coeffs))
+    coeffs = [round(coeff / minCoeff, 4) for coeff in coeffs]
 
     # Warning when there are unusual values
     warn = None
-    if any(filter(lambda x: x < 0 or x > 1000000, coeffs)):
+    if [coeff for coeff in coeffs if not 0 < coeff < 1000000]:
         warn = "Some values are negative or too large. There may be a mistake in your equation."
 
-    return " : ".join(map(lambda x, y: str(x) + y, coeffs, substances)), warn
+    return " : ".join([str(coeff) + substance for coeff, substance in zip(coeffs, substances)]), warn
 
 if __name__ == "__main__":
     print(balance("(Cr[CO(NH2)2]6)4[Cr(CN)6]3+KMnO4+HNO3=K2Cr2O7+CO2+KNO3+Mn(NO3)3+H2O"))
