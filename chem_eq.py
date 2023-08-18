@@ -31,7 +31,7 @@ def balance(equation: str) -> tuple[str, str]:
     except UnicodeEncodeError:
         raise ValueError("Invalid equation")
     
-    reactants = re.split(r"(?<!{)\+(?!})", equation.split("=")[0])
+    reactants = re.split(r"\+(?!})", equation.split("=")[0])
     
     # Count elements
     elements = set()
@@ -45,7 +45,7 @@ def balance(equation: str) -> tuple[str, str]:
     if equation[-1].isupper():
         elements.add(equation[-1])
                 
-    substances = np.array(re.split(r"(?<!{)[\+\=](?!})", equation))
+    substances = np.array(re.split(r"[\+\=](?!})", equation))
     linearEqs = np.zeros((len(elements) + 1, len(substances)))
 
     for i, element in enumerate(elements):
@@ -122,4 +122,5 @@ def balance(equation: str) -> tuple[str, str]:
     return " : ".join([str(coeff) + substance for coeff, substance in zip(coeffs, substances)]), warn
 
 if __name__ == "__main__":
+    print(balance("Fe{2+}+Cl2=Fe{3+}+Cl{-}"))
     print(balance("(Cr[CO(NH2)2]6)4[Cr(CN)6]3+KMnO4+HNO3=K2Cr2O7+CO2+KNO3+Mn(NO3)3+H2O"))
