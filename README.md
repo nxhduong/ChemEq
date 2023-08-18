@@ -8,7 +8,7 @@ This program constructs a matrix based on the number of atoms of each element in
 Any contributions to this project are greatly appreciated.
 ## Requirements
 If run from source code:
-- Python 3.10.x
+- Python 3.10-3.11
 - NumPy and SciPy Python packages 
 ## Usage
 - Run from source code:
