@@ -16,6 +16,7 @@ If run from source code:
 2. Input an unbalanced equation, e.g. CH4 + O2 = CO2 + H2O
 
 - Pre-packaged releases are also available on the `Releases` page
+- The file named `chem_eq.py` can also be included in your project, should you wish to utilize the `balance()` function.
 ### Notes: Valid equation format
 - Reactants and products are separated by an equal sign (`=`)
 - Each substance in the reactants or the products is separated by a plus sign (`+`)
