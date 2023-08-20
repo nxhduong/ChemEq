@@ -15,7 +15,7 @@ If run from source code:
 1. Enter `python main.py` into the command line.
 2. Input an unbalanced equation, e.g. CH4 + O2 = CO2 + H2O
 
-- Pre-packaged app are also available on the `Releases` page
+- Pre-packaged releases are also available on the `Releases` page
 ### Notes: Valid equation format
 - Reactants and products are separated by an equal sign (`=`)
 - Each substance in the reactants or the products is separated by a plus sign (`+`)
