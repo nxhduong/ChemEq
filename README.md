@@ -10,17 +10,19 @@ Any contributions to this project are greatly appreciated.
 If run from source code:
 - Python 3.10-3.11
 - NumPy and SciPy Python packages 
+The above packages are not required for binaries found on the `Releases` page.
 ## Usage
 - Run from source code:
-1. Enter `python main.py` into the command line.
-2. Input an unbalanced equation, e.g. CH4 + O2 = CO2 + H2O
+1. Enter `cd src/chem_eq/` into the command line.
+2. Enter `python __init__.py` into the command line.
+3. Input an unbalanced equation, e.g. CH4 + O2 = CO2 + H2O
 
 - Pre-packaged releases are also available on the `Releases` page
-- The file named `chem_eq.py` can also be included in your project, should you wish to utilize the `balance()` function.
+- You can import the package named `chem_eq` to your project, should you wish to utilize the `balance()` function.
 ### Notes: Valid equation format
 - Reactants and products are separated by an equal sign (`=`)
 - Each substance in the reactants or the products is separated by a plus sign (`+`)
-- Atoms are grouped using round (`()`) or square (`[]`) brackets. Curly brackets must only be used to specify charges.
+- Atoms are grouped using round (`()`) or square (`[]`) brackets. Curly brackets (`{}`) must only be used to specify charges.
 
 E.g.
 ```
