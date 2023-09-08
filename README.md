@@ -9,7 +9,8 @@ Any contributions to this project are greatly appreciated.
 ## Requirements
 If run from source code:
 - Python 3.10-3.11
-- NumPy and SciPy Python packages 
+- NumPy and SciPy Python packages
+
 The above packages are not required for binaries found on the `Releases` page.
 ## Usage
 - Run from source code:
@@ -18,7 +19,7 @@ The above packages are not required for binaries found on the `Releases` page.
 3. Input an unbalanced equation, e.g. CH4 + O2 = CO2 + H2O
 
 - Pre-packaged releases are also available on the `Releases` page
-- You can import the package named `chem_eq` to your project, should you wish to utilize the `balance()` function.
+- You can import the package named `chem_eq` into your project, should you wish to utilize the `balance()` function.
 ### Notes: Valid equation format
 - Reactants and products are separated by an equal sign (`=`)
 - Each substance in the reactants or the products is separated by a plus sign (`+`)
